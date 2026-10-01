@@ -6,16 +6,16 @@ public abstract class Transacao {
 
     private long ID = 0;
     private long valor;
+    private String tipoTransacao;
     private Date dataHora;
 
-    public Transacao(long valor) {
+    public Transacao(long valor, String tipoTransacao) {
         this.valor = valor;
+        this.tipoTransacao = tipoTransacao;
     }
 
-    public void executar() throws BancoException {
-        if (ID != 0) {
-            throw new IllegalStateException("Transacao "+ ID + "ja foi executada.");
-        }
-        efetivar()
+    @Override   
+    public String toString() {
+        return 
     }
 }
