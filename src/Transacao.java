@@ -1,4 +1,6 @@
 import java.util.Date;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 
 public abstract class Transacao {
@@ -6,16 +8,21 @@ public abstract class Transacao {
 
     private long ID = 0;
     private long valor;
-    private String tipoTransacao;
+    private TipoTransacao tipo;
     private Date dataHora;
 
-    public Transacao(long valor, String tipoTransacao) {
+    private static final DateTimeFormatter FMT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+    public Transacao(long valor, TipoTransacao tipo) {
         this.valor = valor;
-        this.tipoTransacao = tipoTransacao;
+        this.tipo = tipo;
+        this.dataHora = LocalDateTime.now();
     }
+
+    public TipoTransacao getTipo() { return tipo; }
 
     @Override   
     public String toString() {
-        return 
+        return String.format("%s | %-22s | R$ %10s", dataHora.format(FMT), tipo, valor);
     }
 }

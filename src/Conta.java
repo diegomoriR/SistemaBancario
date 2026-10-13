@@ -39,12 +39,12 @@ public abstract class Conta {
         
     }
 
-    protected void creditar(long valor, tipoTransacao tipo) {
+    protected void creditar(long valor, TipoTransacao tipo) {
         saldo =+ saldo;
         extrato.add(new Transacao(valor, tipo));
     }
 
-    protected void debitar(long valor, tipoTransacao tipo) {
+    protected void debitar(long valor, TipoTransacao tipo) {
         if(valor > getSaldoDisponivel()) {
             saldo =- saldo;
             extrato.add(new Transacao(valor, tipo));
