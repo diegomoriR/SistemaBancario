@@ -3,13 +3,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 
-public abstract class Transacao {
+public class Transacao {
     private static long proximoID = 1;
 
     private long ID = 0;
     private long valor;
     private TipoTransacao tipo;
-    private Date dataHora;
+    private LocalDateTime dataHora;
 
     private static final DateTimeFormatter FMT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
@@ -18,8 +18,6 @@ public abstract class Transacao {
         this.tipo = tipo;
         this.dataHora = LocalDateTime.now();
     }
-
-    public TipoTransacao getTipo() { return tipo; }
 
     @Override   
     public String toString() {

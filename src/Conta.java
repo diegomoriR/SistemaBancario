@@ -1,4 +1,4 @@
-package SistemaBancario.src;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,14 +21,16 @@ public abstract class Conta {
 
     public abstract void aplicarRotinaMensal();
 
+    public abstract String getTipo();
+
     public void depositar(long valor) {
         validarValor(valor);
-        saldo =+ saldo;
+        creditar(valor, TipoTransacao.SAQUE);
     }
 
     public void sacar(long valor) {
         validarValor(valor);
-        saldo =- saldo;
+        debitar(valor, TipoTransacao.SAQUE);
     }
 
     public void transferir(Conta destino, long valor) {
@@ -45,7 +47,7 @@ public abstract class Conta {
     }
 
     protected void debitar(long valor, TipoTransacao tipo) {
-        if(valor > getSaldoDisponivel()) {
+        if(valor < getSaldoDisponivel()) {
             saldo =- saldo;
             extrato.add(new Transacao(valor, tipo));
         }else{
