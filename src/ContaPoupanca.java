@@ -1,5 +1,10 @@
+import java.io.Serial;
+
 public class ContaPoupanca extends Conta {
-    private static final long TAXA_MENSAL = (long) 0.005; // 0,5% a.m.
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    private static final double TAXA_MENSAL = 0.005;
 
     public ContaPoupanca(int numero, Cliente titular) {
         super(numero, titular);
@@ -9,13 +14,13 @@ public class ContaPoupanca extends Conta {
     public String getTipo() { return "Poupança"; }
 
     @Override
-    public long getSaldoDisponivel() {
-        return getSaldo(); // poupança não tem limite: só saca o que tem
+    public double getSaldoDisponivel() {
+        return getSaldo();
     }
 
     @Override
     public void aplicarRotinaMensal() {
-        long rendimento = getSaldo() * TAXA_MENSAL;
+        double rendimento = getSaldo() * TAXA_MENSAL;
         if (rendimento > 0.0) {
             creditar(rendimento, TipoTransacao.RENDIMENTO);
         }

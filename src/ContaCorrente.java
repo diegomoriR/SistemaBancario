@@ -1,8 +1,13 @@
-public class ContaCorrente extends Conta {
-    private static final long TARIFA_MENSAL = 15;
-    private final long limiteChequeEspecial;
+import java.io.Serial;
 
-    public ContaCorrente(int numero, Cliente titular, long limiteChequeEspecial) {
+public class ContaCorrente extends Conta {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    private static final double TARIFA_MENSAL = 15;
+    private final double limiteChequeEspecial;
+
+    public ContaCorrente(int numero, Cliente titular, double limiteChequeEspecial) {
         super(numero, titular);
         this.limiteChequeEspecial = limiteChequeEspecial;
     }
@@ -11,7 +16,7 @@ public class ContaCorrente extends Conta {
     public String getTipo() { return "Corrente"; }
 
     @Override
-    public long getSaldoDisponivel() {
+    public double getSaldoDisponivel() {
         return getSaldo() + limiteChequeEspecial;
     }
 
@@ -20,5 +25,10 @@ public class ContaCorrente extends Conta {
         debitar(TARIFA_MENSAL, TipoTransacao.TARIFA);
     }
 
-    public long getLimiteChequeEspecial() { return limiteChequeEspecial; }
+    public double getLimiteChequeEspecial() { return limiteChequeEspecial; }
+
+    @Override
+    public String toString() {
+        return super.toString() + String.format(" | Limite: R$ %.2f", limiteChequeEspecial);
+    }
 }
